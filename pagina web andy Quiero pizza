@@ -1,0 +1,116 @@
+@model List<QuieroPizza.BL.producto>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Productos</h2>
+
+@foreach (var producto in Model)
+{
+    <p>@producto.Descripcion</p>
+}
+
+<table class="table table-bordered table-hover">
+    @foreach (var producto in Model)
+    {
+        <tr>
+            <td>@producto.Id</td>
+            <td>@producto.Descripcion</td>
+            <td>@producto.Precio</td>
+      
+        </tr>
+    }
+    
+</table>
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuieroPizza.BL
+{
+  public  class contexto: DbContext 
+    {
+        public class DbContext
+       
+      
+        public contexto (): base("QuieropizzaDB");
+    }
+
+    public class DbContext
+    {
+    }
+}
+using QuieroPizza.BL;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using productoBL;
+
+namespace quieropizza
+{
+    public class ProductosController
+    {
+
+        // GET: Productos
+        public ActionResult Index()
+        {
+
+            var productosBL = new ProductosBL();
+            var ListadeProductos = new productoBL.ObternerProductos();
+
+            return View(ListadeProductos);
+        }
+
+        private ActionResult View(ObternerProductos listadeProductos)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuieroPizza.BL
+{
+    public class ProductosBL
+    {
+        public List<producto> ObtenerProductos()
+        {
+            var producto1 = new producto();
+            producto1.Id = 1;
+            producto1.Descripcion = "Pizza 6 quesos";
+            producto1.Precio = "400";
+
+
+            var producto2 = new producto();
+            producto2.Id = 2;
+            producto2.Descripcion = "Pizza pequeña";
+            producto2.Precio = "200";
+
+            var producto3 = new producto();
+            producto3.Id = 3;
+            producto3.Descripcion = "Pizza jamon y queso";
+            producto3.Precio = "600";
+
+            var ListadeProductos = new List<producto>();
+            ListadeProductos.Add(producto1);
+            ListadeProductos.Add(producto2);
+            ListadeProductos.Add(producto3);
+
+            return ListadeProductos;
+        }
+    
+        
+        
+    }
+}
